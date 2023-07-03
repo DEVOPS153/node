@@ -18,12 +18,14 @@ jobs:
         with:
           node-version: 14
           
-      - name: Build & push Docker image
-        uses: mr-smithers-excellent/docker-build-push@v5
-        with:
-          image: devopscloud153/sample-web-app
-          tags: v1, latest
-          registry: hub.docker.com/u/devopscloud153
-          dockerfile: Dockerfile
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build and publish Docker image
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          docker build -t devopscloud153/sample-web-app:${{ github.sha }} .
+          docker build -t devopscloud153/sample-web-app:latest .
+          docker run -d -p 8080:8080 devopscloud153/sample-web-app:${{ github.sha }}
+          echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+          docker push devopscloud153/sample-web-app:${{ github.sha }}
+          docker push devopscloud153/sample-web-app:latest
