@@ -23,7 +23,7 @@ jobs:
         with:
           image: devopscloud153/sample-web-app
           tags: v1, latest
-          registry: https://hub.docker.com/u/devopscloud153
+          registry: hub.docker.com/u/devopscloud153
           dockerfile: Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
