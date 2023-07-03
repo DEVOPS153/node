@@ -14,10 +14,12 @@ jobs:
         run: docker pull devopscloud153/sample-web-app:latest
 
       - name: Stop existing container (if running)
-        run: docker stop sample-web-app || true
+        run: |
+          docker stop sample-web-app ; $ErrorActionPreference = 'SilentlyContinue'
 
       - name: Remove existing container (if exists)
-        run: docker rm sample-web-app || true
+        run: |
+          docker rm sample-web-app ; $ErrorActionPreference = 'SilentlyContinue'
 
       - name: Run the new container
-        run: docker run -d -p 8080:8080 --name sample-web-app devopscloud153/sample-web-app:latest
+        run: docker run -d -p 8080:8080 --name sample-web-app devopscloud153/sample-web-app:lat
