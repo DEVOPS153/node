@@ -14,8 +14,7 @@ jobs:
         run: docker pull devopscloud153/sample-web-app:latest
 
       - name: Stop existing container (if running)
-        run: |
-          docker stop sample-web-app ; $ErrorActionPreference = 'SilentlyContinue'
+        run: docker stop sample-web-app 2>/dev/null || true
 
       - name: Remove existing container (if exists)
         run: |
