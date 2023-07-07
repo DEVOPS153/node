@@ -13,6 +13,13 @@ jobs:
     steps:
       - name: Download Docker container
         run: docker pull devopscloud153/sample-web-app:latest
+        
+      - name: Stop existing container (if running)
+        run: docker stop sample-web-app 2>/dev/null || true
+
+      - name: Remove existing container (if exists)
+        run: |
+          docker rm sample-web-app 2>/dev/null || true
 
 
       - name: Run the new container
