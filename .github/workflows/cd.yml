@@ -19,8 +19,7 @@ jobs:
 
 
       - name: Remove existing container (if exists)
-        run: |
-          docker rm sample-web-app 2>/dev/null || true
+        run: docker rm sample-web-app 2>$null; $ErrorActionPreference = 'SilentlyContinue'
 
 
       - name: Run the new container
