@@ -23,4 +23,4 @@ jobs:
 
 
       - name: Run the new container
-        run: docker run -d -p 8080:8080 --name sample-web-app devopscloud153/sample-web-app:latest
+        run: docker run -d -p 8080:3000 --name sample-web-app devopscloud153/sample-web-app:latest
