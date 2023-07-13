@@ -24,3 +24,8 @@ jobs:
 
       - name: Run the new container
         run: docker run -d -p 8080:3000 --name sample-web-app devopscloud153/sample-web-app:latest
+
+      - name: Log failure
+        if: ${{ failure() }}
+        run: |
+          echo "$(date) - $GITHUB_REPOSITORY" >> log.txt
