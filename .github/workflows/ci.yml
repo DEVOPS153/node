@@ -32,3 +32,8 @@ jobs:
           docker run -d -p 8080:8080 devopscloud153/sample-web-app:${{ github.sha }}
           docker push devopscloud153/sample-web-app:${{ github.sha }}
           docker push devopscloud153/sample-web-app:latest
+          
+      - name: Log failure
+        if: ${{ failure() }}
+        run: |
+          echo "$(date) - $GITHUB_REPOSITORY" >> log.txt
